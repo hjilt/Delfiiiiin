@@ -11,6 +11,8 @@ public class Main {
         israfil.addKonkurrenceResultat("Sønder Nærums børneturnering for børn", "Flot flot første plads");
         israfil.printKonkurrenceResultat();
 
+        //test
+
         /*System.out.println("Medlem 1:");
         System.out.println("Fulde navn: " + medlem1.getFuldeNavn());
         System.out.println("Køn: " + medlem1.getKoen());
