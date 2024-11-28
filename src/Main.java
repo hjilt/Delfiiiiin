@@ -1,23 +1,17 @@
 import java.time.LocalDate;
-
+import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
-        Discipliner[] israfilDiscipliner = {Discipliner.CRAWL, Discipliner.BRYSTSVOEMNING};
-        Medlem medlem1 = new Medlem( "Tarik Naji", "Mand", LocalDate.of(1996, 1, 8), true);
-        KonkurrenceSvoemmer israfil = new KonkurrenceSvoemmer("Israfil", "dreng?", LocalDate.of(2011,1,8), true, israfilDiscipliner);
-        israfil.recordBestTime(Discipliner.CRAWL, 134);
-        israfil.recordBestTime(Discipliner.BRYSTSVOEMNING, 20000);
-        israfil.printBestTimes();
-        israfil.addKonkurrenceResultat("Sønder Nærums børneturnering for børn", "Flot flot første plads");
-        israfil.printKonkurrenceResultat();
+/*
+        Medlem medlem1 = new Medlem( "Tarik Naji", "Mand", LocalDate.of(1996, 1, 8), true, true);
 
-        /*System.out.println("Medlem 1:");
+        System.out.println("Medlem 1:");
         System.out.println("Fulde navn: " + medlem1.getFuldeNavn());
         System.out.println("Køn: " + medlem1.getKoen());
         System.out.println("Fødselsdato: " + medlem1.getFoedselsdato());
         System.out.println("Alder: " + medlem1.udregnAlder());
         System.out.println("Er senior: " + medlem1.erSenior());
-        System.out.println("kontigentstatus: " + (medlem1.getKontigentStatus() ? "Aktiv" : "Ikke aktiv"));
+        System.out.println("kontigentstatus: " + (medlem1.getKontigentStatus() ? "Aktivt" : "Passivt"));
 
         System.out.println(("\nOpdatering af medlem 1..."));
         medlem1.setFuldeNavn("Sikorsky S-67 Blackhawk");
@@ -30,7 +24,28 @@ public class Main {
         System.out.println("Fødselsdato: " + medlem1.getFoedselsdato());
         System.out.println("Alder: " + medlem1.udregnAlder());
         System.out.println("Er senior: " + medlem1.erSenior());
-        System.out.println("kontigentstatus: " + (medlem1.getKontigentStatus() ? "Aktiv" : "Ikke aktiv"));
-        //test*/
+        System.out.println("kontigentstatus: " + (medlem1.getKontigentStatus() ? "Aktivt" : "Passivt"));
+        */
+
+        Medlem medlem1 = new Medlem("Anna", "Kvinde", LocalDate.of(2005, 5, 20), true); // Aktiv ungdom
+        Medlem medlem2 = new Medlem("Ole", "Mand", LocalDate.of(1965, 3, 15), true);  // Aktiv senior
+        Medlem medlem3 = new Medlem("Jens", "Mand", LocalDate.of(1940, 8, 10), true); // Aktiv over 60
+        Medlem medlem4 = new Medlem("Marie", "Kvinde", LocalDate.of(1990, 1, 5), false); // Passiv
+
+        System.out.println("Kontingent for Anna: " + medlem1.beregnKontingent());
+        System.out.println("Kontingent for Ole: " + medlem2.beregnKontingent());
+        System.out.println("Kontingent for Jens: " + medlem3.beregnKontingent());
+        System.out.println("Kontingent for Marie: " + medlem4.beregnKontingent());
+
+        ArrayList<Medlem> medlemmer = new ArrayList<>();
+
+        medlemmer.add(new Medlem("Anna", "Kvinde", LocalDate.of(2005, 5, 20), true)); // Aktiv ungdom
+        medlemmer.add(new Medlem("Ole", "Mand", LocalDate.of(1965, 3, 15), true));  // Aktiv senior
+        medlemmer.add(new Medlem("Jensn", "Mand", LocalDate.of(1940, 8, 10), true)); // Aktiv over 60
+        medlemmer.add(new Medlem("Marie", "Kvinde", LocalDate.of(1990, 1, 5), false)); // Passiv
+
+        double totalIndkomst = Medlem.beregnSamletIndkomst(medlemmer);
+
+        System.out.println("Den samlede årlige indkomst fra kontingenter er: " + totalIndkomst + " kr.");
     }
 }

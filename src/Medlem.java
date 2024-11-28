@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 
 public class Medlem {
 
@@ -8,14 +9,24 @@ public class Medlem {
     private LocalDate foedselsdato;
     private boolean erSenior;
     private boolean kontigentStatus;
-    private boolean erKonkurrenceSvoemmer;
+    private boolean erAktivtMedlem;
 
-    public Medlem (String fuldeNavn, String koen, LocalDate foedselsdato, boolean kontigentStatus) {
+    public Medlem (String fuldeNavn, String koen, LocalDate foedselsdato, boolean erAktivtMedlem) {
         this.fuldeNavn = fuldeNavn;
         this.koen = koen;
         this.foedselsdato = foedselsdato;
         this.kontigentStatus = kontigentStatus;
+        this.erAktivtMedlem = erAktivtMedlem;
     }
+
+    public boolean getErAktivtMedlem() {
+        return erAktivtMedlem;
+    }
+
+    public void setErAktivtMedlem(boolean erAktivtMedlem){
+        this.erAktivtMedlem = erAktivtMedlem;
+    }
+
     public String getFuldeNavn(){
         return fuldeNavn;
     }
@@ -36,14 +47,6 @@ public class Medlem {
         return foedselsdato;
     }
 
-    public boolean getKontigentStatus(){
-        return kontigentStatus;
-    }
-
-    public void setKontigentStatus(boolean kontigentsStatus){
-        this.kontigentStatus = kontigentsStatus;
-    }
-
     public int udregnAlder() {
         LocalDate aktuelleDato = LocalDate.now();
         Period period = Period.between(foedselsdato, aktuelleDato);
@@ -51,7 +54,32 @@ public class Medlem {
     }
 
     public boolean erSenior() {
-        return udregnAlder() > 18;
+        return udregnAlder() > 60;
+    }
+
+
+
+    public double beregnKontingent(){
+        if (!erAktivtMedlem) {
+            return 500.0;
+        }
+
+        int alder = udregnAlder();
+        if (alder < 18) {
+            return 1000.0;
+        } else if (alder >= 18 && alder <=60){
+            return 1600.0;
+        } else if (alder > 60) {
+            return 1600.0 * 0.75;
+        }
+        return 0.0;
+    }
+    public static double beregnSamletIndkomst(ArrayList<Medlem> medlemmer){
+        double total = 0.0;
+
+        for (Medlem medlem : medlemmer) {
+            total += medlem.beregnKontingent();
+        }
+        return total;
     }
 }
-
