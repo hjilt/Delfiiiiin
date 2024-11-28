@@ -33,9 +33,6 @@ public class Traener {
         this.skema = skema;
     }
 
-
-
-
 }
 
 
