@@ -50,7 +50,7 @@ public class Medlem {
     }
 
     public boolean erSenior() {
-        return udregnAlder() > 60;
+        return udregnAlder() > 18;
     }
 }
 
