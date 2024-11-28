@@ -7,8 +7,8 @@ public class Traener {
         this.navn = navn;
         this.hold = hold;
         this.skema = skema;
-    }
 
+    }
     public String getNavn(){
         return navn;
     }
@@ -32,6 +32,7 @@ public class Traener {
     public void setSkema(String skema){
         this.skema = skema;
     }
+
 }
 
 
