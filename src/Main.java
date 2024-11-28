@@ -13,7 +13,7 @@ public class Main {
         israfil.addKonkurrenceResultat("Sønder Nærums børneturnering for børn", "Flot flot første plads");
         israfil.printKonkurrenceResultat();
 
-        //nu tester vi push
+        //nu tester vi push mere
 
         /*System.out.println("Medlem 1:");
         System.out.println("Fulde navn: " + medlem1.getFuldeNavn());
