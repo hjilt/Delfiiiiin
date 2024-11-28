@@ -25,6 +25,5 @@ public class Main {
         System.out.println("Alder: " + medlem1.udregnAlder());
         System.out.println("Er senior: " + medlem1.erSenior());
         System.out.println("kontigentstatus: " + (medlem1.getKontigentStatus() ? "Aktiv" : "Ikke aktiv"));
->>>>>>> Stashed changes
     }
 }
