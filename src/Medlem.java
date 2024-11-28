@@ -8,6 +8,7 @@ public class Medlem {
     private LocalDate foedselsdato;
     private boolean erSenior;
     private boolean kontigentStatus;
+    private boolean erKonkurrenceSvoemmer;
 
     public Medlem (String fuldeNavn, String koen, LocalDate foedselsdato, boolean kontigentStatus) {
         this.fuldeNavn = fuldeNavn;

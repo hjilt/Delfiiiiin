@@ -2,10 +2,16 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-
+        Discipliner[] israfilDiscipliner = {Discipliner.CRAWL, Discipliner.BRYSTSVOEMNING};
         Medlem medlem1 = new Medlem( "Tarik Naji", "Mand", LocalDate.of(1996, 1, 8), true);
+        KonkurrenceSvoemmer israfil = new KonkurrenceSvoemmer("Israfil", "dreng?", LocalDate.of(2011,1,8), true, israfilDiscipliner);
+        israfil.recordBestTime(Discipliner.CRAWL, 134);
+        israfil.recordBestTime(Discipliner.BRYSTSVOEMNING, 20000);
+        israfil.printBestTimes();
+        israfil.addKonkurrenceResultat("Sønder Nærums børneturnering for børn", "Flot flot første plads");
+        israfil.printKonkurrenceResultat();
 
-        System.out.println("Medlem 1:");
+        /*System.out.println("Medlem 1:");
         System.out.println("Fulde navn: " + medlem1.getFuldeNavn());
         System.out.println("Køn: " + medlem1.getKoen());
         System.out.println("Fødselsdato: " + medlem1.getFoedselsdato());
@@ -25,6 +31,6 @@ public class Main {
         System.out.println("Alder: " + medlem1.udregnAlder());
         System.out.println("Er senior: " + medlem1.erSenior());
         System.out.println("kontigentstatus: " + (medlem1.getKontigentStatus() ? "Aktiv" : "Ikke aktiv"));
-        //test
+        //test*/
     }
 }
