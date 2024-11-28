@@ -2,9 +2,7 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-<<<<<<< Updated upstream
         System.out.println("Hello test!");
-=======
 
         Medlem medlem1 = new Medlem( "Tarik Naji", "Mand", LocalDate.of(1996, 1, 8), true);
 
@@ -28,6 +26,5 @@ public class Main {
         System.out.println("Alder: " + medlem1.udregnAlder());
         System.out.println("Er senior: " + medlem1.erSenior());
         System.out.println("kontigentstatus: " + (medlem1.getKontigentStatus() ? "Aktiv" : "Ikke aktiv"));
->>>>>>> Stashed changes
     }
 }
