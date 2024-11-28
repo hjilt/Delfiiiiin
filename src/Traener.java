@@ -29,11 +29,9 @@ public class Traener {
         return skema;
     }
 
-    public void setSkema(String skema) {
+    public void setSkema(String skema){
         this.skema = skema;
     }
-
-
 
 }
 
