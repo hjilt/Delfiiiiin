@@ -7,9 +7,13 @@ public class Main {
         KonkurrenceSvoemmer israfil = new KonkurrenceSvoemmer("Israfil", "dreng?", LocalDate.of(2011,1,8), true, israfilDiscipliner);
         israfil.recordBestTime(Discipliner.CRAWL, 134);
         israfil.recordBestTime(Discipliner.BRYSTSVOEMNING, 20000);
+        israfil.recordBestTime(Discipliner.BRYSTSVOEMNING, 120);
+        israfil.recordBestTime(Discipliner.BRYSTSVOEMNING, 240);
         israfil.printBestTimes();
         israfil.addKonkurrenceResultat("Sønder Nærums børneturnering for børn", "Flot flot første plads");
         israfil.printKonkurrenceResultat();
+
+        //nu tester vi push mere
 
         /*System.out.println("Medlem 1:");
         System.out.println("Fulde navn: " + medlem1.getFuldeNavn());
