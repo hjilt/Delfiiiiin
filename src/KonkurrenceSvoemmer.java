@@ -6,9 +6,9 @@ public class KonkurrenceSvoemmer extends Medlem{
     private Map<String, String> konkurrenceResultater;
     public Discipliner[] discipliner;
 
-    public KonkurrenceSvoemmer(String navn, String koen, LocalDate foedselsDato, boolean kontingentStatus, Discipliner[] discipliner)
+    public KonkurrenceSvoemmer(String navn, String koen, LocalDate foedselsDato, boolean erAktivtMedlem)
     {
-        super(navn, koen, foedselsDato, kontingentStatus);
+        super(navn, koen, foedselsDato, erAktivtMedlem);
         bestResults = new HashMap<>();
         konkurrenceResultater = new HashMap<>();
         this.discipliner = discipliner;
