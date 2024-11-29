@@ -4,12 +4,15 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Medlem> medlemmer = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
+        Klub klub = new Klub();
 
-        medlemmer.add(new Medlem("Mikkel Hansen", "Mand", LocalDate.of(1995, 5, 20), true));
+        Persistens persistens = new Persistens();
+        persistens.loadMedlemmerFromCSV("medlemmer.txt", klub);
+
+        /*medlemmer.add(new Medlem("Mikkel Hansen", "Mand", LocalDate.of(1995, 5, 20), true));
         medlemmer.add(new KonkurrenceSvoemmer("Sarah Pedersen", "Kvinde", LocalDate.of(2003, 3, 15), true));
-        medlemmer.add(new Medlem("Lone Jensen", "Kvinde", LocalDate.of(1950, 10, 5), true));
+        medlemmer.add(new Medlem("Lone Jensen", "Kvinde", LocalDate.of(1950, 10, 5), true));*/
 
         boolean programKoerer = true;
 
@@ -22,10 +25,10 @@ public class Main {
             int valg = scanner.nextInt();
             switch (valg) {
                 case 1:
-                    medlemsMenu(scanner, medlemmer);
+                    medlemsMenu(scanner, klub);
                     break;
                 case 2:
-                    kontingentMenu(scanner, medlemmer);
+                    kontingentMenu(scanner, klub);
                     break;
                 case 3:
                     programKoerer = false;
@@ -39,7 +42,7 @@ public class Main {
         scanner.close();
     }
 
-    private static void medlemsMenu(Scanner scanner, ArrayList<Medlem> medlemmer) {
+    private static void medlemsMenu(Scanner scanner, Klub klub) {
         boolean fortsaetMedlemsMenu = true;
         while (fortsaetMedlemsMenu) {
             System.out.println("\nMedlemshåndtering:");
@@ -53,36 +56,37 @@ public class Main {
             int medlemValg = scanner.nextInt();
             switch (medlemValg) {
                 case 1:
-                    for (Medlem medlem : medlemmer) {
-                        System.out.println(medlem.getFuldeNavn());
+                    for (Medlem medlem : klub.getMedlemmer()) {
+                        printMedlemmer(medlem);
+                        //System.out.println(medlem.getFuldeNavn());
                     }
                     break;
                 case 2:
-                    for (Medlem medlem : medlemmer) {
+                    for (Medlem medlem : klub.getMedlemmer()) {
                         if (medlem.udregnAlder() < 18) {
-                            System.out.println(medlem.getFuldeNavn());
+                            printMedlemmer(medlem);
                         }
                     }
                     break;
                 case 3:
-                    for (Medlem medlem : medlemmer) {
+                    for (Medlem medlem : klub.getMedlemmer()) {
                         int alder = medlem.udregnAlder();
                         if (alder >= 18 && alder < 60) {
-                            System.out.println(medlem.getFuldeNavn());
+                            printMedlemmer(medlem);
                         }
                     }
                     break;
                 case 4:
-                    for (Medlem medlem : medlemmer) {
+                    for (Medlem medlem : klub.getMedlemmer()) {
                         if (medlem.udregnAlder() >= 60) {
-                            System.out.println(medlem.getFuldeNavn());
+                            printMedlemmer(medlem);
                         }
                     }
                     break;
                 case 5:
-                    for (Medlem medlem : medlemmer) {
+                    for (Medlem medlem : klub.getMedlemmer()) {
                         if (medlem instanceof KonkurrenceSvoemmer) {
-                            System.out.println(medlem.getFuldeNavn());
+                            printMedlemmer(medlem);
                         }
                     }
                     break;
@@ -97,7 +101,7 @@ public class Main {
         }
     }
 
-    private static void kontingentMenu(Scanner scanner, ArrayList<Medlem> medlemmer) {
+    private static void kontingentMenu(Scanner scanner, Klub klub) {
         boolean fortsaetKontingentMenu = true;
         while (fortsaetKontingentMenu) {
             System.out.println("\nKontingenthåndtering:");
@@ -108,13 +112,13 @@ public class Main {
             int kontingentValg = scanner.nextInt();
             switch (kontingentValg) {
                 case 1:
-                    for (Medlem medlem : medlemmer) {
+                    for (Medlem medlem : klub.getMedlemmer()) {
                         System.out.println(medlem.getFuldeNavn() + " betaler " + medlem.beregnKontingent() + " i kontingent");
                     }
                     break;
                 case 2:
                     double totalIndkomst = 0;
-                    for (Medlem medlem : medlemmer) {
+                    for (Medlem medlem : klub.getMedlemmer()) {
                         totalIndkomst += medlem.beregnKontingent();
                     }
                     System.out.println("Total indkomst: " + totalIndkomst);
@@ -127,6 +131,17 @@ public class Main {
                     break;
             }
             System.out.println();
+        }
+    }
+
+    private static void printMedlemmer(Medlem medlem)
+    {
+        char konkurrenceSvømmer = medlem instanceof KonkurrenceSvoemmer ? 'X' : ' ';
+        System.out.println("\nNavn: " + medlem.getFuldeNavn() + "\nAlder: " +  + medlem.udregnAlder() + "\nKonkurrence-svømmer: " + "[" + konkurrenceSvømmer + "]");
+        if(medlem instanceof KonkurrenceSvoemmer) {
+            System.out.println("Discipliner: ");
+            for (Discipliner discipliner : ((KonkurrenceSvoemmer) medlem).getDiscipliner())
+                System.out.println(discipliner.toString());
         }
     }
 }

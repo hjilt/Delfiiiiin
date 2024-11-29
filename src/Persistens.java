@@ -6,14 +6,13 @@ import java.time.format.*;
 
 public class Persistens {
 //load medlemmer
-public static List<Medlem> loadMedlemmerFromCSV(String filePath) {
+public static void loadMedlemmerFromCSV(String filePath, Klub klub) {
     List<Medlem> medlemmer = new ArrayList<>();
     String line;
     String csvSeparator = ",";
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-        br.readLine();
 
         while ((line = br.readLine()) != null) {
             String[] values = line.split(csvSeparator);
@@ -24,41 +23,34 @@ public static List<Medlem> loadMedlemmerFromCSV(String filePath) {
                 LocalDate foedselsdato = LocalDate.parse(values[2], dateFormatter);
                 boolean erAktivtMedlem = Boolean.parseBoolean(values[3]);
                 boolean erKonkurrenceSvømmer = Boolean.parseBoolean(values[4]);
+                Medlem medlem;
 
                 if (erKonkurrenceSvømmer) {
-                    KonkurrenceSvoemmer svoemmer = new KonkurrenceSvoemmer(fuldeNavn, koen, foedselsdato, erAktivtMedlem);
-                    if (values.length > 5) {
-                        String[] discipliner = values[5].split(";");
-                        for (String disciplin : discipliner) {
+                    KonkurrenceSvoemmer svoemmer;
+                    if (values.length > 5 && !values[5].isBlank()) {
+                        String[] disciplinerStrings = values[5].split(";");
+                        Discipliner[] discipliner = new Discipliner[disciplinerStrings.length];
+                        for (int i = 0; i < disciplinerStrings.length; i++) {
                             try {
-                                svoemmer.recordBestTime(Discipliner.valueOf(disciplin), Double.MAX_VALUE); // Placeholder time
+                                discipliner[i] = Discipliner.valueOf(disciplinerStrings[i].toUpperCase());
                             } catch (IllegalArgumentException e) {
-                                System.err.println("Invalid disciplin: " + disciplin);
+                                System.err.println("Invalid disciplin: " + disciplinerStrings[i]);
                             }
                         }
+                        svoemmer = new KonkurrenceSvoemmer(fuldeNavn, koen, foedselsdato, erAktivtMedlem, discipliner);
+                    } else {
+                        // No disciplines specified, pass none to varargs
+                        svoemmer = new KonkurrenceSvoemmer(fuldeNavn, koen, foedselsdato, erAktivtMedlem);
                     }
-                    medlemmer.add(svoemmer);
+                    medlem = svoemmer;
                 } else {
-                    medlemmer.add(new Medlem(fuldeNavn, koen, foedselsdato, erAktivtMedlem));
+                   medlem = new Medlem(fuldeNavn, koen, foedselsdato, erAktivtMedlem);
                 }
+                klub.tilfoejMedlem(medlem);
             }
         }
     } catch (IOException e) {
         e.printStackTrace();
     }
-
-    return medlemmer;
 }
-
-    public static void main(String[] args) {
-        String filePath = "medlemmer.txt"; // Path to your CSV file
-        List<Medlem> medlemmer = loadMedlemmerFromCSV(filePath);
-
-        for (Medlem medlem : medlemmer) {
-            System.out.println(medlem.getFuldeNavn());
-            if (medlem instanceof KonkurrenceSvoemmer) {
-                ((KonkurrenceSvoemmer) medlem).printBestTimes();
-            }
-        }
-    }
 }

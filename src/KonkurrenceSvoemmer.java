@@ -6,12 +6,12 @@ public class KonkurrenceSvoemmer extends Medlem{
     private Map<String, String> konkurrenceResultater;
     public Discipliner[] discipliner;
 
-    public KonkurrenceSvoemmer(String navn, String koen, LocalDate foedselsDato, boolean erAktivtMedlem)
+    public KonkurrenceSvoemmer(String navn, String koen, LocalDate foedselsDato, boolean erAktivtMedlem, Discipliner ... disciplin)
     {
         super(navn, koen, foedselsDato, erAktivtMedlem);
         bestResults = new HashMap<>();
         konkurrenceResultater = new HashMap<>();
-        this.discipliner = discipliner;
+        this.discipliner = disciplin;
     }
 
     public void recordBestTime(Discipliner disciplin, double time)
@@ -33,5 +33,10 @@ public class KonkurrenceSvoemmer extends Medlem{
     public void printKonkurrenceResultat()
     {
         System.out.println(konkurrenceResultater);
+    }
+
+    public Discipliner[] getDiscipliner()
+    {
+        return discipliner;
     }
 }

@@ -5,4 +5,4 @@ Emma Thomsen,F,2001-08-10,true,true,BUTTERFLY;BRYSTSVOEMNING
 Anders Jensen,M,1995-11-29,true,false
 Nanna Sørensen,F,1999-05-17,true,true,CRAWL;BRYSTSVOEMNING;BUTTERFLY
 Ole Nielsen,M,1965-02-20,false,false
-Katrine Dahl,F,2003-07-25,true,true,RYGCRAWL;CRAWL
+Katrine Dahl,F,2015-07-25,true,true,RYGCRAWL;CRAWL
