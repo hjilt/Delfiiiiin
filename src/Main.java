@@ -53,8 +53,6 @@ public class Main {
         System.out.println("Den samlede årlige indkomst fra kontingenter er: " + totalIndkomst + " kr.");
         */
 
-
-
         // Ved ikke om det er lavet rigtigt eller om det overhovdet skal være sådan, men i kan lige se til engang
         Traener traener1 = new Traener("Ole", "oevet hold", "Mandag og Onsdag");
         System.out.println(traener1);
