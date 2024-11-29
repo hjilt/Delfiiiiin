@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<Medlem> medlemmer = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        
+
         medlemmer.add(new Medlem("Mikkel Hansen", "Mand", LocalDate.of(1995, 5, 20), true));
         medlemmer.add(new KonkurrenceSvoemmer("Sarah Pedersen", "Kvinde", LocalDate.of(2003, 3, 15), true));
         medlemmer.add(new Medlem("Lone Jensen", "Kvinde", LocalDate.of(1950, 10, 5), true));

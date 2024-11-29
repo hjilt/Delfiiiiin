@@ -44,6 +44,7 @@ public class Traener {
     public String toString() {
         return "Navn: " + navn + "\nHold: " + hold + "\nSkema: " + skema;
     }
+
     //metode til at få listen over alle trænere
     public static List<Traener> getAllTraenere() {
         return traenere;
@@ -54,5 +55,3 @@ public class Traener {
         new Traener(navn, hold, skema); // Tilføjer automatisk til listen
     }
 }
-
-

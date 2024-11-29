@@ -1,0 +1,8 @@
+Mads Mikkelsen,M,1985-06-22,true,false
+Sofie Pedersen,F,1990-03-14,true,true,CRAWL;RYGCRAWL
+Lars Hansen,M,1978-12-02,false,false
+Emma Thomsen,F,2001-08-10,true,true,BUTTERFLY;BRYSTSVOEMNING
+Anders Jensen,M,1995-11-29,true,false
+Nanna Sørensen,F,1999-05-17,true,true,CRAWL;BRYSTSVOEMNING;BUTTERFLY
+Ole Nielsen,M,1965-02-20,false,false
+Katrine Dahl,F,2003-07-25,true,true,RYGCRAWL;CRAWL
