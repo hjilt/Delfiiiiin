@@ -4,10 +4,6 @@ public class Klub {
     ArrayList<KonkurrenceSvoemmer> juniorHold = new ArrayList<>();
     ArrayList<KonkurrenceSvoemmer> seniorHold = new ArrayList<>();
 
-
-    
-
-
     public void tilfoejMedlem(Medlem medlem) {
 
         if (medlem.erSenior()){
@@ -18,7 +14,4 @@ public class Klub {
             juniorHold.add((KonkurrenceSvoemmer) medlem);
         }
     }
-
-
-
 }

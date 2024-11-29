@@ -13,7 +13,6 @@ public class Traener {
         this.hold = hold;
         this.skema = skema;
         traenere.add(this);
-
     }
 
     public String getNavn() {
@@ -39,8 +38,6 @@ public class Traener {
     public void setSkema(String skema) {
         this.skema = skema;
     }
-<<<<<<< Updated upstream
-
 
     public String toString() {
         return "Navn: " + navn + "\nHold: " + hold + "\nSkema: " + skema;
@@ -54,9 +51,6 @@ public class Traener {
     public static void addTraener(String navn, String hold, String skema) {
         new Traener(navn, hold, skema); // Tilføjer automatisk til listen
     }
-
-=======
->>>>>>> Stashed changes
 }
 
 
