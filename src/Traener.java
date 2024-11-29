@@ -39,6 +39,7 @@ public class Traener {
     public void setSkema(String skema) {
         this.skema = skema;
     }
+<<<<<<< Updated upstream
 
 
     public String toString() {
@@ -54,6 +55,8 @@ public class Traener {
         new Traener(navn, hold, skema); // Tilføjer automatisk til listen
     }
 
+=======
+>>>>>>> Stashed changes
 }
 
 
