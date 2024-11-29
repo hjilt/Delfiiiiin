@@ -1,86 +1,132 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //TEST AF MEDLEM OG OPDATER MEDLEM
-        /*
-        Medlem medlem1 = new Medlem( "Tarik Naji", "Mand", LocalDate.of(1996, 1, 8), true, true);
-
-        System.out.println("Medlem 1:");
-        System.out.println("Fulde navn: " + medlem1.getFuldeNavn());
-        System.out.println("Køn: " + medlem1.getKoen());
-        System.out.println("Fødselsdato: " + medlem1.getFoedselsdato());
-        System.out.println("Alder: " + medlem1.udregnAlder());
-        System.out.println("Er senior: " + medlem1.erSenior());
-        System.out.println("kontigentstatus: " + (medlem1.getKontigentStatus() ? "Aktivt" : "Passivt"));
-
-        System.out.println(("\nOpdatering af medlem 1..."));
-        medlem1.setFuldeNavn("Sikorsky S-67 Blackhawk");
-        medlem1.setKoen("Non-Binær angrebshelikopter");
-        medlem1.setKontigentStatus(false);
-
-        System.out.println("Opdateret Medlem 1:");
-        System.out.println("Fulde navn: " + medlem1.getFuldeNavn());
-        System.out.println("Køn: " + medlem1.getKoen());
-        System.out.println("Fødselsdato: " + medlem1.getFoedselsdato());
-        System.out.println("Alder: " + medlem1.udregnAlder());
-        System.out.println("Er senior: " + medlem1.erSenior());
-        System.out.println("kontigentstatus: " + (medlem1.getKontigentStatus() ? "Aktivt" : "Passivt"));
-        */
-
-        //TEST AF KONTINGENT OG INDKOMST
-        /*
-        Medlem medlem1 = new Medlem("Anna", "Kvinde", LocalDate.of(2005, 5, 20), true); // Aktiv ungdom
-        Medlem medlem2 = new Medlem("Ole", "Mand", LocalDate.of(1965, 3, 15), true);  // Aktiv senior
-        Medlem medlem3 = new Medlem("Jens", "Mand", LocalDate.of(1940, 8, 10), true); // Aktiv over 60
-        Medlem medlem4 = new Medlem("Marie", "Kvinde", LocalDate.of(1990, 1, 5), false); // Passiv
-
-        System.out.println("Kontingent for Anna: " + medlem1.beregnKontingent());
-        System.out.println("Kontingent for Ole: " + medlem2.beregnKontingent());
-        System.out.println("Kontingent for Jens: " + medlem3.beregnKontingent());
-        System.out.println("Kontingent for Marie: " + medlem4.beregnKontingent());
-
         ArrayList<Medlem> medlemmer = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        
+        medlemmer.add(new Medlem("Mikkel Hansen", "Mand", LocalDate.of(1995, 5, 20), true));
+        medlemmer.add(new KonkurrenceSvoemmer("Sarah Pedersen", "Kvinde", LocalDate.of(2003, 3, 15), true));
+        medlemmer.add(new Medlem("Lone Jensen", "Kvinde", LocalDate.of(1950, 10, 5), true));
 
-        medlemmer.add(new Medlem("Anna", "Kvinde", LocalDate.of(2005, 5, 20), true)); // Aktiv ungdom
-        medlemmer.add(new Medlem("Ole", "Mand", LocalDate.of(1965, 3, 15), true));  // Aktiv senior
-        medlemmer.add(new Medlem("Jensn", "Mand", LocalDate.of(1940, 8, 10), true)); // Aktiv over 60
-        medlemmer.add(new Medlem("Marie", "Kvinde", LocalDate.of(1990, 1, 5), false)); // Passiv
+        boolean programKoerer = true;
 
-        double totalIndkomst = Medlem.beregnSamletIndkomst(medlemmer);
+        while (programKoerer) {
+            System.out.println("\nVælg en mulighed:");
+            System.out.println("1: Håndter medlemmer");
+            System.out.println("2: Håndter kontingent");
+            System.out.println("3: Afslut");
 
-        System.out.println("Den samlede årlige indkomst fra kontingenter er: " + totalIndkomst + " kr.");
-        */
+            int valg = scanner.nextInt();
+            switch (valg) {
+                case 1:
+                    medlemsMenu(scanner, medlemmer);
+                    break;
+                case 2:
+                    kontingentMenu(scanner, medlemmer);
+                    break;
+                case 3:
+                    programKoerer = false;
+                    break;
+                default:
+                    System.out.println("Ugyldigt valg, prøv igen.");
+                    break;
+            }
+        }
 
+        scanner.close();
+    }
 
+    private static void medlemsMenu(Scanner scanner, ArrayList<Medlem> medlemmer) {
+        boolean fortsaetMedlemsMenu = true;
+        while (fortsaetMedlemsMenu) {
+            System.out.println("\nMedlemshåndtering:");
+            System.out.println("1: Vis alle medlemmer");
+            System.out.println("2: Medlemmer under 18");
+            System.out.println("3: Medlemmer 18 og over, men under 60");
+            System.out.println("4: Medlemmer 60 og over");
+            System.out.println("5: Konkurrencesvømmere");
+            System.out.println("6: Tilbage til hovedmenuen");
 
-        // Ved ikke om det er lavet rigtigt eller om det overhovdet skal være sådan, men i kan lige se til engang
-        Traener traener1 = new Traener("Ole", "oevet hold", "Mandag og Onsdag");
-        System.out.println(traener1);
-
-        // Ændring af hold og skema
-        traener1.setHold("Oevet hold");
-        traener1.setSkema("Tirsdag og Torsdag");
-        System.out.println("\nOpdateret information:");
-        System.out.println(traener1);
-
-        Traener traener2 = new Traener("Oskar", "Begynder hold", "Fredag");
-        System.out.println("\nNy træner:");
-        System.out.println(traener2);
-
-        // Tilføj træner
-        Traener.addTraener("Bord", "Oevet hold", "Mandag og Onsdag");
-        Traener.addTraener("Mike Wasawski", "Begynder hold", "Fredag");
-
-        // Vis alle trænere
-        System.out.println("Alle trænere:");
-        for (Traener traener : Traener.getAllTraenere()) {
-            System.out.println(traener);
+            int medlemValg = scanner.nextInt();
+            switch (medlemValg) {
+                case 1:
+                    for (Medlem medlem : medlemmer) {
+                        System.out.println(medlem.getFuldeNavn());
+                    }
+                    break;
+                case 2:
+                    for (Medlem medlem : medlemmer) {
+                        if (medlem.udregnAlder() < 18) {
+                            System.out.println(medlem.getFuldeNavn());
+                        }
+                    }
+                    break;
+                case 3:
+                    for (Medlem medlem : medlemmer) {
+                        int alder = medlem.udregnAlder();
+                        if (alder >= 18 && alder < 60) {
+                            System.out.println(medlem.getFuldeNavn());
+                        }
+                    }
+                    break;
+                case 4:
+                    for (Medlem medlem : medlemmer) {
+                        if (medlem.udregnAlder() >= 60) {
+                            System.out.println(medlem.getFuldeNavn());
+                        }
+                    }
+                    break;
+                case 5:
+                    for (Medlem medlem : medlemmer) {
+                        if (medlem instanceof KonkurrenceSvoemmer) {
+                            System.out.println(medlem.getFuldeNavn());
+                        }
+                    }
+                    break;
+                case 6:
+                    fortsaetMedlemsMenu = false;
+                    break;
+                default:
+                    System.out.println("Ugyldigt valg, prøv igen.");
+                    break;
+            }
             System.out.println();
         }
     }
 
+    private static void kontingentMenu(Scanner scanner, ArrayList<Medlem> medlemmer) {
+        boolean fortsaetKontingentMenu = true;
+        while (fortsaetKontingentMenu) {
+            System.out.println("\nKontingenthåndtering:");
+            System.out.println("1: Vis kontingent for hvert medlem");
+            System.out.println("2: Vis samlet kontingentindkomst");
+            System.out.println("3: Tilbage til hovedmenuen");
+
+            int kontingentValg = scanner.nextInt();
+            switch (kontingentValg) {
+                case 1:
+                    for (Medlem medlem : medlemmer) {
+                        System.out.println(medlem.getFuldeNavn() + " betaler " + medlem.beregnKontingent() + " i kontingent");
+                    }
+                    break;
+                case 2:
+                    double totalIndkomst = 0;
+                    for (Medlem medlem : medlemmer) {
+                        totalIndkomst += medlem.beregnKontingent();
+                    }
+                    System.out.println("Total indkomst: " + totalIndkomst);
+                    break;
+                case 3:
+                    fortsaetKontingentMenu = false;
+                    break;
+                default:
+                    System.out.println("Ugyldigt valg, prøv igen.");
+                    break;
+            }
+            System.out.println();
+        }
+    }
 }
-
-
