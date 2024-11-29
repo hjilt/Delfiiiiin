@@ -3,7 +3,8 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-/*
+        //TEST AF MEDLEM OG OPDATER MEDLEM
+        /*
         Medlem medlem1 = new Medlem( "Tarik Naji", "Mand", LocalDate.of(1996, 1, 8), true, true);
 
         System.out.println("Medlem 1:");
@@ -28,6 +29,8 @@ public class Main {
         System.out.println("kontigentstatus: " + (medlem1.getKontigentStatus() ? "Aktivt" : "Passivt"));
         */
 
+        //TEST AF KONTINGENT OG INDKOMST
+        /*
         Medlem medlem1 = new Medlem("Anna", "Kvinde", LocalDate.of(2005, 5, 20), true); // Aktiv ungdom
         Medlem medlem2 = new Medlem("Ole", "Mand", LocalDate.of(1965, 3, 15), true);  // Aktiv senior
         Medlem medlem3 = new Medlem("Jens", "Mand", LocalDate.of(1940, 8, 10), true); // Aktiv over 60
@@ -48,7 +51,7 @@ public class Main {
         double totalIndkomst = Medlem.beregnSamletIndkomst(medlemmer);
 
         System.out.println("Den samlede årlige indkomst fra kontingenter er: " + totalIndkomst + " kr.");
-
+        */
 
 
 
@@ -57,7 +60,7 @@ public class Main {
         System.out.println(traener1);
 
         // Ændring af hold og skema
-        traener1.setHold("Ovet hold");
+        traener1.setHold("Oevet hold");
         traener1.setSkema("Tirsdag og Torsdag");
         System.out.println("\nOpdateret information:");
         System.out.println(traener1);
