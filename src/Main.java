@@ -48,5 +48,36 @@ public class Main {
         double totalIndkomst = Medlem.beregnSamletIndkomst(medlemmer);
 
         System.out.println("Den samlede årlige indkomst fra kontingenter er: " + totalIndkomst + " kr.");
+
+
+
+
+        // Ved ikke om det er lavet rigtigt eller om det overhovdet skal være sådan, men i kan lige se til engang
+        Traener traener1 = new Traener("Ole", "oevet hold", "Mandag og Onsdag");
+        System.out.println(traener1);
+
+        // Ændring af hold og skema
+        traener1.setHold("Ovet hold");
+        traener1.setSkema("Tirsdag og Torsdag");
+        System.out.println("\nOpdateret information:");
+        System.out.println(traener1);
+
+        Traener traener2 = new Traener("Oskar", "Begynder hold", "Fredag");
+        System.out.println("\nNy træner:");
+        System.out.println(traener2);
+
+        // Tilføj træner
+        Traener.addTraener("Bord", "Oevet hold", "Mandag og Onsdag");
+        Traener.addTraener("Mike Wasawski", "Begynder hold", "Fredag");
+
+        // Vis alle trænere
+        System.out.println("Alle trænere:");
+        for (Traener traener : Traener.getAllTraenere()) {
+            System.out.println(traener);
+            System.out.println();
+        }
     }
+
 }
+
+

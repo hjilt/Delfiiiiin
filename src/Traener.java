@@ -1,14 +1,18 @@
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class Traener {
     String navn;
     String hold;
     String skema;
 
+    private static List<Traener> traenere = new ArrayList<>();
+
     public Traener(String navn, String hold, String skema) {
         this.navn = navn;
         this.hold = hold;
         this.skema = skema;
+        traenere.add(this);
 
     }
 
@@ -36,6 +40,19 @@ public class Traener {
         this.skema = skema;
     }
 
+
+    public String toString() {
+        return "Navn: " + navn + "\nHold: " + hold + "\nSkema: " + skema;
+    }
+    //metode til at få listen over alle trænere
+    public static List<Traener> getAllTraenere() {
+        return traenere;
+    }
+
+    //metode til at tilføje en ny træner
+    public static void addTraener(String navn, String hold, String skema) {
+        new Traener(navn, hold, skema); // Tilføjer automatisk til listen
+    }
 
 }
 
