@@ -14,6 +14,11 @@ public class Main {
         medlemmer.add(new KonkurrenceSvoemmer("Sarah Pedersen", "Kvinde", LocalDate.of(2003, 3, 15), true));
         medlemmer.add(new Medlem("Lone Jensen", "Kvinde", LocalDate.of(1950, 10, 5), true));*/
 
+        Traener Ole = new Traener("Ole Dolriis", "Senior Træner", "Mandag 6:00-8:00, Onsdag kl. 6:00-8:00, Fredag kl. 06:00-8:00");
+        Traener Oskar = new Traener("Oskar Tuska", "Junior Træner", "Tirsdag 6:00-8:00, Torsdag kl. 6:00-8:00, Lørdag kl. 06:00-8:00" );
+        Traener.traenere.add(Oskar);
+        Traener.traenere.add(Ole);
+
         boolean programKoerer = true;
 
         while (programKoerer) {
