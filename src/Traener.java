@@ -13,7 +13,6 @@ public class Traener {
         this.hold = hold;
         this.skema = skema;
         traenere.add(this);
-
     }
 
     public String getNavn() {
