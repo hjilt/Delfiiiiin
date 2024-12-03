@@ -6,7 +6,8 @@ public class Traener {
     String hold;
     String skema;
 
-    private static List<Traener> traenere = new ArrayList<>();
+    public static ArrayList<Traener> traenere = new ArrayList<>();
+
 
     public Traener(String navn, String hold, String skema) {
         this.navn = navn;
@@ -53,4 +54,5 @@ public class Traener {
     public static void addTraener(String navn, String hold, String skema) {
         new Traener(navn, hold, skema); // Tilføjer automatisk til listen
     }
+
 }
