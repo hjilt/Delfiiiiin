@@ -15,7 +15,6 @@ public class Medlem {
         this.fuldeNavn = fuldeNavn;
         this.koen = koen;
         this.foedselsdato = foedselsdato;
-        this.kontigentStatus = kontigentStatus;
         this.erAktivtMedlem = erAktivtMedlem;
     }
 
