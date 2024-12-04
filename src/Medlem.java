@@ -56,8 +56,6 @@ public class Medlem {
         return udregnAlder() > 18;
     }
 
-
-
     public double beregnKontingent(){
         if (!erAktivtMedlem) {
             return 500.0;
