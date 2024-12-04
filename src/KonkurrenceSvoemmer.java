@@ -20,9 +20,9 @@ public class KonkurrenceSvoemmer extends Medlem{
             bestResults.put(disciplin, time);
     }
 
-    public void printBestTimes()
+    public Map<Discipliner, Double> getBestTimes()
     {
-        System.out.println(bestResults);
+        return bestResults;
     }
 
     public void addKonkurrenceResultat(String konkurrence, String resultat)

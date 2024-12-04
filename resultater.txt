@@ -1,0 +1,9 @@
+Sofie Pedersen,CRAWL,55.32
+Sofie Pedersen,RYGCRAWL,58.14
+Emma Thomsen,BUTTERFLY,49.87
+Emma Thomsen,BRYSTSVOEMNING,61.45
+Nanna Sørensen,CRAWL,54.20
+Nanna Sørensen,BRYSTSVOEMNING,63.00
+Nanna Sørensen,BUTTERFLY,50.50
+Katrine Dahl,RYGCRAWL,65.22
+Katrine Dahl,CRAWL,64.10

@@ -9,6 +9,12 @@ public class Main {
 
         Persistens persistens = new Persistens();
         persistens.loadMedlemmerFromCSV("medlemmer.txt", klub);
+        persistens.loadBedsteTider("resultater.txt", klub);
+
+        for(Medlem medlem : klub.getMedlemmer()) {
+            if(medlem instanceof KonkurrenceSvoemmer)
+                System.out.println(medlem.getFuldeNavn() + ": " + ((KonkurrenceSvoemmer) medlem).getBestTimes());
+        }
 
         /*medlemmer.add(new Medlem("Mikkel Hansen", "Mand", LocalDate.of(1995, 5, 20), true));
         medlemmer.add(new KonkurrenceSvoemmer("Sarah Pedersen", "Kvinde", LocalDate.of(2003, 3, 15), true));
