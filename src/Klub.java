@@ -18,14 +18,11 @@ public class Klub {
             if (medlem.erSenior()) {
                 seniorHold.add(svoemmer);
                 medlemmer.add(medlem);
-                System.out.println("Medlem er tilføjet til seniorholdet!");
             } else {
                 juniorHold.add(svoemmer);
                 medlemmer.add(medlem);
-                System.out.println("Medlem er tilføjet til juniorholdet!");
             }
         } else {
-            System.out.println("Bro er ikke konkurrence Svømmer. Prøv igen!");
             medlemmer.add(medlem);
         }
     }
