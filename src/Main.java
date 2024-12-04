@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -19,13 +21,16 @@ public class Main {
         Traener.traenere.add(Oskar);
         Traener.traenere.add(Ole);
 
+
+
         boolean programKoerer = true;
 
         while (programKoerer) {
             System.out.println("\nVælg en mulighed:");
             System.out.println("1: Håndter medlemmer");
             System.out.println("2: Håndter kontingent");
-            System.out.println("3: Afslut");
+            System.out.println("3: Træner og skema");
+            System.out.println("4: Afslut");
 
             int valg = scanner.nextInt();
             switch (valg) {
@@ -36,6 +41,9 @@ public class Main {
                     kontingentMenu(scanner, klub);
                     break;
                 case 3:
+                    traenerOgSkemaMenu(scanner, klub);
+                    break;
+                case 4:
                     programKoerer = false;
                     break;
                 default:
@@ -136,6 +144,27 @@ public class Main {
                     break;
             }
             System.out.println();
+        }
+    }
+
+    private static void traenerOgSkemaMenu(Scanner scanner, Klub klub) {
+        boolean fortsaetTraener = true;
+        while (fortsaetTraener) {
+            System.out.println("\nTræner og skema:");
+            System.out.println("1: Vis alle trænere");
+            System.out.println("2. Se skema");
+            System.out.println("3. Tilbage til hovedmenuen");
+
+            int traenerValg = scanner.nextInt();
+            switch (traenerValg) {
+                case 1:
+                    for (Traener traener : Traener.getTraenere()) {
+                        Traener.printTraenere();
+                    }
+
+               // case 2:
+
+            }
         }
     }
 

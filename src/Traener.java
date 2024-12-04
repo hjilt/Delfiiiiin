@@ -14,7 +14,6 @@ public class Traener {
         this.hold = hold;
         this.skema = skema;
         traenere.add(this);
-
     }
 
     public String getNavn() {
@@ -47,8 +46,14 @@ public class Traener {
     }
 
     //metode til at få listen over alle trænere
-    public static List<Traener> getAllTraenere() {
+    public static ArrayList<Traener> getTraenere() {
         return traenere;
+    }
+
+    public static void printTraenere(){
+        for (Traener traener : traenere) {
+            System.out.println(traener);
+        }
     }
 
     //metode til at tilføje en ny træner
