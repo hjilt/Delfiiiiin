@@ -33,6 +33,7 @@ public class Main {
             System.out.println("4: Afslut");
 
             int valg = scanner.nextInt();
+            scanner.nextLine();
             switch (valg) {
                 case 1:
                     medlemsMenu(scanner, klub);
@@ -64,7 +65,8 @@ public class Main {
             System.out.println("3: Medlemmer 18 og over, men under 60");
             System.out.println("4: Medlemmer 60 og over");
             System.out.println("5: Konkurrencesvømmere");
-            System.out.println("6: Tilbage til hovedmenuen");
+            System.out.println("6: Registrer nyt medlem");
+            System.out.println("7: Tilbage til hovedmenuen");
 
             int medlemValg = scanner.nextInt();
             switch (medlemValg) {
@@ -104,6 +106,8 @@ public class Main {
                     }
                     break;
                 case 6:
+                    registrerNytMedlem(scanner,klub);
+                case 7:
                     fortsaetMedlemsMenu = false;
                     break;
                 default:
@@ -158,10 +162,10 @@ public class Main {
             int traenerValg = scanner.nextInt();
             switch (traenerValg) {
                 case 1:
-                        Traener.printTraenere();
-                        break;
+                    Traener.printTraenere();
+                    break;
 
-               // case 2:
+                // case 2:
 
             }
         }
@@ -176,5 +180,47 @@ public class Main {
             for (Discipliner discipliner : ((KonkurrenceSvoemmer) medlem).getDiscipliner())
                 System.out.println(discipliner.toString());
         }
+    }
+
+    private static void registrerNytMedlem(Scanner scanner, Klub klub) {
+        scanner.nextLine();
+
+        System.out.println("Indtast fulde navn:");
+        String fuldeNavn = scanner.nextLine();
+
+        System.out.println("Indtast køn");
+        String koen = scanner.nextLine();
+
+        System.out.println("Indtast fødselsdato (yyyy-mm-dd)1");
+        LocalDate foedselsdato = LocalDate.parse(scanner.nextLine());
+
+        System.out.println("Er medlemmet aktivt? (true/false)");
+        boolean erAktivtMedlem = Boolean.parseBoolean(scanner.nextLine());
+
+        System.out.println("Er medlemmet en konkurrencesvømmer? (True/False)");
+        boolean erKonkurrenceSvoemmer = Boolean.parseBoolean(scanner.nextLine());
+
+        LocalDate oprettelsesDato = LocalDate.now();
+
+        Medlem nytMedlem;
+        if (erKonkurrenceSvoemmer) {
+            System.out.println("Indtast discipliner" +
+                    "\n    (BUTTERFLY,\n" +
+                    "    CRAWL,\n" +
+                    "    RYGCRAWL,\n" +
+                    "    BRYSTSVOEMNING) \n(separeret med semikolon)");
+            String disciplinerInput = scanner.nextLine();
+            String[] disciplinerStrings = disciplinerInput.split(";");
+            Discipliner[] discipliner = new Discipliner[disciplinerStrings.length];
+            for (int i = 0; i < discipliner.length; i++) {
+                discipliner[i] = Discipliner.valueOf(disciplinerStrings[i].toUpperCase());
+            }
+            nytMedlem = new KonkurrenceSvoemmer(fuldeNavn, koen, foedselsdato, oprettelsesDato, erAktivtMedlem, discipliner);
+        } else {
+            nytMedlem = new Medlem(fuldeNavn, koen, foedselsdato, oprettelsesDato, erAktivtMedlem);
+        }
+
+        klub.tilfoejMedlem(nytMedlem);
+        System.out.println("Nyt medlem registreret: " + nytMedlem.getFuldeNavn());
     }
 }

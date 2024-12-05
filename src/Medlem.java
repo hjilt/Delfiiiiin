@@ -1,8 +1,14 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.time.LocalDate;
 import java.time.Period;
+<<<<<<< HEAD
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+=======
+>>>>>>> 12e418ecd1f6154f91791238ab67bc90fb2eff43
 import java.util.ArrayList;
+import java.util.DoubleSummaryStatistics;
 
 public class Medlem {
 
@@ -15,7 +21,7 @@ public class Medlem {
     private double restance;
     private LocalDate oprettelsesDato;
 
-    public Medlem (String fuldeNavn, String koen, LocalDate foedselsdato, LocalDate oprettelsesDato, boolean erAktivtMedlem) {
+    public Medlem(String fuldeNavn, String koen, LocalDate foedselsdato, LocalDate oprettelsesDato, boolean erAktivtMedlem) {
         this.fuldeNavn = fuldeNavn;
         this.koen = koen;
         this.foedselsdato = foedselsdato;
@@ -29,7 +35,7 @@ public class Medlem {
         this.restance = restance;
     }
 
-    public double getRestance(){
+    public double getRestance() {
         return restance;
     }
 
@@ -37,27 +43,27 @@ public class Medlem {
         return erAktivtMedlem;
     }
 
-    public void setErAktivtMedlem(boolean erAktivtMedlem){
+    public void setErAktivtMedlem(boolean erAktivtMedlem) {
         this.erAktivtMedlem = erAktivtMedlem;
     }
 
-    public String getFuldeNavn(){
+    public String getFuldeNavn() {
         return fuldeNavn;
     }
 
-    public void setFuldeNavn(String fuldeNavn){
+    public void setFuldeNavn(String fuldeNavn) {
         this.fuldeNavn = fuldeNavn;
     }
 
-    public String getKoen(){
+    public String getKoen() {
         return koen;
     }
 
-    public void setKoen(String koen){
+    public void setKoen(String koen) {
         this.koen = koen;
     }
 
-    public LocalDate getFoedselsdato(){
+    public LocalDate getFoedselsdato() {
         return foedselsdato;
     }
 
@@ -71,14 +77,14 @@ public class Medlem {
         return udregnAlder() > 18;
     }
 
-    public double beregnKontingent(){
+    public double beregnKontingent() {
         if (!erAktivtMedlem) {
             return 500.0;
         }
         int alder = udregnAlder();
         if (alder < 18) {
             return 1000.0;
-        } else if (alder >= 18 && alder <=60){
+        } else if (alder >= 18 && alder <= 60) {
             return 1600.0;
         } else if (alder > 60) {
             return 1600.0 * 0.75;
@@ -86,7 +92,7 @@ public class Medlem {
         return 0.0;
     }
 
-    public static double beregnSamletIndkomst(ArrayList<Medlem> medlemmer){
+    public static double beregnSamletIndkomst(ArrayList<Medlem> medlemmer) {
         double total = 0.0;
 
         for (Medlem medlem : medlemmer) {
@@ -95,6 +101,7 @@ public class Medlem {
         return total;
     }
 
+<<<<<<< HEAD
     double juniorSats = 1000;
     double seniorSats = 1600;
 
@@ -132,3 +139,23 @@ public class Medlem {
     }
 
 }
+=======
+    }
+    public void betalKontigent(double beloeb) {
+        if (beloeb <= 0) {
+            System.out.println("Beløbet skal være større end 0");
+            return;
+        }
+
+        double restance;
+        if (beloeb >= restance) {
+            System.out.println("Betaling modtaget: " + beloeb + " kr. Restance på " + restance + " er nu betalt.");
+            restance = 0;
+        } else {
+            restance -= beloeb;
+            System.out.println("Betaling modtaget: " + beloeb + " kr. Ny restance: " + restance + " kr.");
+        }
+    }
+
+}
+>>>>>>> 12e418ecd1f6154f91791238ab67bc90fb2eff43
