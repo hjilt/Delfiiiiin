@@ -158,9 +158,8 @@ public class Main {
             int traenerValg = scanner.nextInt();
             switch (traenerValg) {
                 case 1:
-                    for (Traener traener : Traener.getTraenere()) {
                         Traener.printTraenere();
-                    }
+                        break;
 
                // case 2:
 
