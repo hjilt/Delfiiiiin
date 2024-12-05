@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -87,6 +88,38 @@ public class Medlem {
             return 1600.0 * 0.75;
         }
         return 0.0;
+    }
+    double juniorSats = 1000;
+    double seniorSats = 1600;
+
+    public static double alderBetaling(LocalDate foedselsdato, LocalDate medlemsDato, int aar, double juniorSats, double seniorSats) {
+        //Årets interval
+        LocalDate startAfAaret = LocalDate.of(aar, Month.JANUARY, 1);
+        LocalDate slutAfAaret = LocalDate.of(aar, Month.DECEMBER, 31);
+
+        int alderStartAfAaret = Period.between(foedselsdato, startAfAaret).getYears();
+
+        int alderVedMedlemskab = Period.between(foedselsdato, medlemsDato).getYears();
+
+        double kontingent = 0.0;
+
+        if (alderVedMedlemskab >= 18) {
+            LocalDate fylder18 = foedselsdato.plusYears(18);
+            if (fylder18.isAfter(medlemsDato) && fylder18.isBefore(slutAfAaret)) {
+
+                double maanedUnder18 = fylder18.getMonthValue() - medlemsDato.getMonthValue();
+                double maanedover18 = 12 - maanedUnder18;
+
+                kontingent = (maanedUnder18 / 12) * juniorSats + (maanedover18 / 12.0) * seniorSats;
+            }
+
+            // else if (alderVedMedlemskab >=
+
+
+        } else {
+            //hele året under 18
+            kontingent = juniorSats;
+        }
     }
 
     public static double beregnSamletIndkomst(ArrayList<Medlem> medlemmer){
