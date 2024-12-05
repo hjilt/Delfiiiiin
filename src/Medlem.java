@@ -22,7 +22,8 @@ public class Medlem {
         this.oprettelsesDato = oprettelsesDato;
         restance = beregnKontingent();
     }
-
+//TODO Funktion til at registrere indbetalinger.
+//TODO Gør så den tager udgangspunkt i registreringsdato ift det der skal betales.
     public void setRestance(double restance) {
         this.restance = restance;
     }
