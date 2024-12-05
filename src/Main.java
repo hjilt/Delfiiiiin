@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//TODO Nice up Switch Case
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -24,7 +25,6 @@ public class Main {
         Traener.traenere.add(Ole);
 
         boolean programKoerer = true;
-
         while (programKoerer) {
             System.out.println("\nVælg en mulighed:");
             System.out.println("1: Håndter medlemmer");
@@ -158,9 +158,8 @@ public class Main {
             int traenerValg = scanner.nextInt();
             switch (traenerValg) {
                 case 1:
-                    for (Traener traener : Traener.getTraenere()) {
                         Traener.printTraenere();
-                    }
+                        break;
 
                // case 2:
 
