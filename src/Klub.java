@@ -40,6 +40,5 @@ public class Klub {
             System.out.println("Træningstider: " + traener.getSkema());
             System.out.println("-----------------------------\n");
         }
-
-
+    }
 }
