@@ -130,4 +130,22 @@ public class Medlem {
         }
         return total;
     }
+
+
+    
+    public void betalKontigent(double beloeb) {
+        if (beloeb <= 0) {
+            System.out.println("Beløbet skal være større end 0");
+            return;
+        }
+
+        if (beloeb >= restance) {
+            System.out.println("Betaling modtaget: " + beloeb + " kr. Restance på " + restance + " er nu betalt.");
+            restance = 0;
+        } else {
+            restance -= beloeb;
+            System.out.println("Betaling modtaget: " + beloeb + " kr. Ny restance: " + restance + " kr.");
+        }
+    }
+
 }
