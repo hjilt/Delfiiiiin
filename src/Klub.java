@@ -26,7 +26,6 @@ public class Klub {
             medlemmer.add(medlem);
         }
     }
-
     public ArrayList<Medlem> getMedlemmer() {
         return medlemmer;
     }

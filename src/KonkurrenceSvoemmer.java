@@ -12,7 +12,7 @@ public class KonkurrenceSvoemmer extends Medlem{
         super(navn, koen, foedselsDato, oprettelsesDato, erAktivtMedlem);
         bestResults = new HashMap<>();
         konkurrenceResultater = new HashMap<>();
-        this.discipliner = disciplin;
+        this.discipliner = disciplin.length > 0 ? disciplin : new Discipliner[0];
     }
 
     public void recordBestTime(Discipliner disciplin, double time)
@@ -39,5 +39,20 @@ public class KonkurrenceSvoemmer extends Medlem{
     public Discipliner[] getDiscipliner()
     {
         return discipliner;
+    }
+
+    public void udskrivBestTimes()
+    {
+        System.out.println("The best result: "+getFuldeNavn()+":");
+        for (Discipliner disciplin : Discipliner.values())
+        {
+            if (bestResults.containsKey(disciplin))
+            {
+                System.out.printf("Tid: ", disciplin, bestResults.get(disciplin));
+            }else {
+                System.out.printf(" Resultater", disciplin);
+            }
+
+        }
     }
 }

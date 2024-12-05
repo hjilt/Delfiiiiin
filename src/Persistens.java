@@ -5,6 +5,7 @@ import java.time.format.*;
 
 
 public class Persistens {
+
 //load medlemmer
     public static void loadMedlemmerFromCSV(String filePath, Klub klub) {
         List<Medlem> medlemmer = new ArrayList<>();
@@ -22,8 +23,8 @@ public class Persistens {
                     String koen = values[1];
                     LocalDate foedselsdato = LocalDate.parse(values[2], dateFormatter);
                     LocalDate oprettelsesDato = LocalDate.parse(values[3], dateFormatter);
-                    boolean erAktivtMedlem = Boolean.parseBoolean(values[3]);
-                    boolean erKonkurrenceSvømmer = Boolean.parseBoolean(values[4]);
+                    boolean erAktivtMedlem = Boolean.parseBoolean(values[4]);
+                    boolean erKonkurrenceSvømmer = Boolean.parseBoolean(values[5]);
                     Medlem medlem;
 
                     if (erKonkurrenceSvømmer) {
@@ -53,6 +54,44 @@ public class Persistens {
             e.printStackTrace();
         }
 }
+
+    public static void saveMedlemmerToCSV(String filePath, Klub klub) {
+        String csvSeparator = ",";
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath)))
+        {
+            for (Medlem medlem : klub.getMedlemmer()) {
+                StringBuilder line = new StringBuilder();
+                line.append(medlem.getFuldeNavn()).append(csvSeparator)
+                .append(medlem.getKoen()).append(csvSeparator)
+                .append(medlem.getFoedselsdato()).append(csvSeparator)
+                .append(medlem.getOprettelsesDato()).append(csvSeparator)
+                .append(medlem.getErAktivtMedlem()).append(csvSeparator);
+
+                if (medlem instanceof KonkurrenceSvoemmer) {
+                    KonkurrenceSvoemmer svoemmer = (KonkurrenceSvoemmer) medlem;
+                    line.append("true").append(csvSeparator);
+                    if (svoemmer.getDiscipliner() != null && svoemmer.getDiscipliner().length > 0) {
+                        for (int i = 0; i < svoemmer.getDiscipliner().length; i++) {
+                            Discipliner disciplin = svoemmer.getDiscipliner()[i];
+                            line.append(disciplin.name());
+                            if (i < svoemmer.getDiscipliner().length - 1) {
+                                line.append(";"); // Add semicolon only if not the last element
+                            }
+                        }
+                    }
+                } else {
+                    line.append("false");  // mark as non-competitive swimmer
+                }
+                bw.write(line.toString());
+                bw.newLine();
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public static void loadBedsteTider(String filePath, Klub klub)
     {
         String line;
@@ -80,9 +119,6 @@ public class Persistens {
                     if (medlem instanceof KonkurrenceSvoemmer) {
                         ((KonkurrenceSvoemmer) medlem).recordBestTime(disciplin, time);
                         System.out.println("TEST VIRKER YEEHAWW");
-                    }
-                    else {
-                        System.out.println("Svømmer ikke fundet ");
                     }
                 }
             }
