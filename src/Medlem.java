@@ -1,21 +1,34 @@
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Medlem {
 
-    private String fuldeNavn;
+    protected String fuldeNavn;
     private String koen;
     private LocalDate foedselsdato;
     private boolean erSenior;
     private boolean kontigentStatus;
     private boolean erAktivtMedlem;
+    private double restance;
+    private LocalDate oprettelsesDato;
 
-    public Medlem (String fuldeNavn, String koen, LocalDate foedselsdato, boolean erAktivtMedlem) {
+    public Medlem (String fuldeNavn, String koen, LocalDate foedselsdato, LocalDate oprettelsesDato, boolean erAktivtMedlem) {
         this.fuldeNavn = fuldeNavn;
         this.koen = koen;
         this.foedselsdato = foedselsdato;
         this.erAktivtMedlem = erAktivtMedlem;
+        this.oprettelsesDato = oprettelsesDato;
+        restance = beregnKontingent();
+    }
+
+    public void setRestance(double restance) {
+        this.restance = restance;
+    }
+
+    public double getRestance(){
+        return restance;
     }
 
     public boolean getErAktivtMedlem() {
@@ -60,7 +73,6 @@ public class Medlem {
         if (!erAktivtMedlem) {
             return 500.0;
         }
-
         int alder = udregnAlder();
         if (alder < 18) {
             return 1000.0;
@@ -71,6 +83,7 @@ public class Medlem {
         }
         return 0.0;
     }
+
     public static double beregnSamletIndkomst(ArrayList<Medlem> medlemmer){
         double total = 0.0;
 

@@ -1,5 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,17 +15,13 @@ public class Main {
             if(medlem instanceof KonkurrenceSvoemmer)
                 System.out.println(medlem.getFuldeNavn() + ": " + ((KonkurrenceSvoemmer) medlem).getBestTimes());
         }
-
-        /*medlemmer.add(new Medlem("Mikkel Hansen", "Mand", LocalDate.of(1995, 5, 20), true));
-        medlemmer.add(new KonkurrenceSvoemmer("Sarah Pedersen", "Kvinde", LocalDate.of(2003, 3, 15), true));
+        /*medlemmer.add(new KonkurrenceSvoemmer("Sarah Pedersen", "Kvinde", LocalDate.of(2003, 3, 15), true));
         medlemmer.add(new Medlem("Lone Jensen", "Kvinde", LocalDate.of(1950, 10, 5), true));*/
 
         Traener Ole = new Traener("Ole Dolriis", "Senior Træner", "Mandag 6:00-8:00, Onsdag kl. 6:00-8:00, Fredag kl. 06:00-8:00");
         Traener Oskar = new Traener("Oskar Tuska", "Junior Træner", "Tirsdag 6:00-8:00, Torsdag kl. 6:00-8:00, Lørdag kl. 06:00-8:00" );
         Traener.traenere.add(Oskar);
         Traener.traenere.add(Ole);
-
-
 
         boolean programKoerer = true;
 
@@ -177,7 +171,7 @@ public class Main {
     private static void printMedlemmer(Medlem medlem)
     {
         char konkurrenceSvømmer = medlem instanceof KonkurrenceSvoemmer ? 'X' : ' ';
-        System.out.println("\nNavn: " + medlem.getFuldeNavn() + "\nAlder: " +  + medlem.udregnAlder() + "\nKonkurrence-svømmer: " + "[" + konkurrenceSvømmer + "]");
+        System.out.println("\nNavn: " + medlem.getFuldeNavn() + "\nAlder: " +  + medlem.udregnAlder() + "\nRestance: " + medlem.getRestance() + "\nKonkurrence-svømmer: " + "[" + konkurrenceSvømmer + "]");
         if(medlem instanceof KonkurrenceSvoemmer) {
             System.out.println("Discipliner: ");
             for (Discipliner discipliner : ((KonkurrenceSvoemmer) medlem).getDiscipliner())

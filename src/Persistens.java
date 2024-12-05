@@ -17,18 +17,19 @@ public class Persistens {
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(csvSeparator);
 
-                if (values.length >= 5) {
+                if (values.length >= 6) {
                     String fuldeNavn = values[0];
                     String koen = values[1];
                     LocalDate foedselsdato = LocalDate.parse(values[2], dateFormatter);
+                    LocalDate oprettelsesDato = LocalDate.parse(values[3], dateFormatter);
                     boolean erAktivtMedlem = Boolean.parseBoolean(values[3]);
                     boolean erKonkurrenceSvømmer = Boolean.parseBoolean(values[4]);
                     Medlem medlem;
 
                     if (erKonkurrenceSvømmer) {
                         KonkurrenceSvoemmer svoemmer;
-                        if (values.length > 5 && !values[5].isBlank()) {
-                            String[] disciplinerStrings = values[5].split(";");
+                        if (values.length > 6 && !values[6].isBlank()) {
+                            String[] disciplinerStrings = values[6].split(";");
                             Discipliner[] discipliner = new Discipliner[disciplinerStrings.length];
                             for (int i = 0; i < disciplinerStrings.length; i++) {
                                 try {
@@ -37,13 +38,13 @@ public class Persistens {
                                     System.err.println("Invalid disciplin: " + disciplinerStrings[i]);
                                 }
                             }
-                            svoemmer = new KonkurrenceSvoemmer(fuldeNavn, koen, foedselsdato, erAktivtMedlem, discipliner);
+                            svoemmer = new KonkurrenceSvoemmer(fuldeNavn, koen, foedselsdato, oprettelsesDato, erAktivtMedlem, discipliner);
                         } else {
-                            svoemmer = new KonkurrenceSvoemmer(fuldeNavn, koen, foedselsdato, erAktivtMedlem);
+                            svoemmer = new KonkurrenceSvoemmer(fuldeNavn, koen, foedselsdato, oprettelsesDato, erAktivtMedlem);
                         }
                         medlem = svoemmer;
                     } else {
-                       medlem = new Medlem(fuldeNavn, koen, foedselsdato, erAktivtMedlem);
+                       medlem = new Medlem(fuldeNavn, koen, foedselsdato, oprettelsesDato, erAktivtMedlem);
                     }
                     klub.tilfoejMedlem(medlem);
                 }
@@ -83,6 +84,38 @@ public class Persistens {
                     else {
                         System.out.println("Svømmer ikke fundet ");
                     }
+                }
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadRestancer(String filePath, Klub klub)
+    {
+        String line;
+        String csvSeparator = ",";
+
+        try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
+            while((line = br.readLine()) != null)
+            {
+                String[] values = line.split(csvSeparator);
+                if (values.length == 2) {
+                    String fuldeNavn = values[0];
+                    double restance = Double.parseDouble(values[1]);
+
+                    Medlem medlem = null;
+                    for(Medlem m : klub.getMedlemmer())
+                    {
+                        if(m.getFuldeNavn().equalsIgnoreCase(fuldeNavn))
+                        {
+                            medlem = m;
+                            break;
+                        }
+                    }
+                    medlem.setRestance(restance);
                 }
             }
         }

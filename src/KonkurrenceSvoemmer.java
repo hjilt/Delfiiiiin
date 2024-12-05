@@ -1,4 +1,5 @@
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class KonkurrenceSvoemmer extends Medlem{
@@ -6,9 +7,9 @@ public class KonkurrenceSvoemmer extends Medlem{
     private Map<String, String> konkurrenceResultater;
     public Discipliner[] discipliner;
 
-    public KonkurrenceSvoemmer(String navn, String koen, LocalDate foedselsDato, boolean erAktivtMedlem, Discipliner ... disciplin)
+    public KonkurrenceSvoemmer(String navn, String koen, LocalDate foedselsDato, LocalDate oprettelsesDato, boolean erAktivtMedlem, Discipliner ... disciplin)
     {
-        super(navn, koen, foedselsDato, erAktivtMedlem);
+        super(navn, koen, foedselsDato, oprettelsesDato, erAktivtMedlem);
         bestResults = new HashMap<>();
         konkurrenceResultater = new HashMap<>();
         this.discipliner = disciplin;
