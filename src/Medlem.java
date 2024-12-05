@@ -28,6 +28,10 @@ public class Medlem {
         this.restance = restance;
     }
 
+    public LocalDate getOprettelsesDato() {
+        return oprettelsesDato;
+    }
+
     public double getRestance(){
         return restance;
     }
