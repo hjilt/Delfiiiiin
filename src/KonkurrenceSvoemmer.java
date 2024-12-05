@@ -1,5 +1,4 @@
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class KonkurrenceSvoemmer extends Medlem{
