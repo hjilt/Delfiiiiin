@@ -162,10 +162,10 @@ public class Main {
             int traenerValg = scanner.nextInt();
             switch (traenerValg) {
                 case 1:
-                        Traener.printTraenere();
-                        break;
+                    Traener.printTraenere();
+                    break;
 
-               // case 2:
+                // case 2:
 
             }
         }
