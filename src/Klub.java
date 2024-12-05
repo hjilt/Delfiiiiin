@@ -30,4 +30,17 @@ public class Klub {
     public ArrayList<Medlem> getMedlemmer() {
         return medlemmer;
     }
+
+
+    public void visTraeningsSkema() {
+        System.out.println("Træningsskema:");
+        for (Traener traener : Traener.getTraenere()) {
+            System.out.println("-----------------------------");
+            System.out.println("Træner: " + traener.getNavn());
+            System.out.println("Hold: " + traener.getHold());
+            System.out.println("Træningstider: " + traener.getSkema());
+            System.out.println("-----------------------------\n");
+        }
+
+
 }
