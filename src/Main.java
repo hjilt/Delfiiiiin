@@ -24,7 +24,6 @@ public class Main {
         Traener.traenere.add(Ole);
 
         boolean programKoerer = true;
-
         while (programKoerer) {
             System.out.println("\nVælg en mulighed:");
             System.out.println("1: Håndter medlemmer");
