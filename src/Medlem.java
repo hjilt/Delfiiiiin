@@ -92,34 +92,39 @@ public class Medlem {
     double juniorSats = 1000;
     double seniorSats = 1600;
 
-    public static double alderBetaling(LocalDate foedselsdato, LocalDate medlemsDato, int aar, double juniorSats, double seniorSats) {
+    public static double alderBetaling(LocalDate foedselsdato, LocalDate oprettelsesDato, int aar, double juniorSats, double seniorSats) {
         //Årets interval
         LocalDate startAfAaret = LocalDate.of(aar, Month.JANUARY, 1);
         LocalDate slutAfAaret = LocalDate.of(aar, Month.DECEMBER, 31);
 
         int alderStartAfAaret = Period.between(foedselsdato, startAfAaret).getYears();
 
-        int alderVedMedlemskab = Period.between(foedselsdato, medlemsDato).getYears();
+        int alderVedMedlemskab = Period.between(foedselsdato, oprettelsesDato).getYears();
 
         double kontingent = 0.0;
 
         if (alderVedMedlemskab >= 18) {
             LocalDate fylder18 = foedselsdato.plusYears(18);
-            if (fylder18.isAfter(medlemsDato) && fylder18.isBefore(slutAfAaret)) {
+            if (fylder18.isAfter(oprettelsesDato) && fylder18.isBefore(slutAfAaret)) {
 
-                double maanedUnder18 = fylder18.getMonthValue() - medlemsDato.getMonthValue();
+                double maanedUnder18 = fylder18.getMonthValue() - oprettelsesDato.getMonthValue();
                 double maanedover18 = 12 - maanedUnder18;
 
                 kontingent = (maanedUnder18 / 12) * juniorSats + (maanedover18 / 12.0) * seniorSats;
+            } else {
+                //hele året under 18
+                kontingent = juniorSats;
             }
-
-            // else if (alderVedMedlemskab >=
-
-
-        } else {
-            //hele året under 18
-            kontingent = juniorSats;
+        }else {
+        //hele året over 18
+            kontingent = seniorSats;
         }
+
+        if (oprettelsesDato.isAfter(startAfAaret)) {
+            int resterendeMaaneder = 12 - oprettelsesDato.getMonthValue();
+            kontingent = (resterendeMaaneder / 12) * kontingent;
+        }
+        return kontingent;
     }
 
     public static double beregnSamletIndkomst(ArrayList<Medlem> medlemmer){
