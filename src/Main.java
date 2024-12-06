@@ -11,10 +11,6 @@ public class Main {
         Persistens persistens = new Persistens();
         persistens.loadMedlemmerFromCSV("medlemmer.txt", klub);
         persistens.loadBedsteTider("resultater.txt", klub);
-        Medlem medlemmm = new Medlem("Hjalte Kappel", "Boiiiii", LocalDate.of(1997, 11, 20), LocalDate.of(2023,05,01), true);
-        KonkurrenceSvoemmer konkuu = new KonkurrenceSvoemmer("David", "F", LocalDate.of(1998, 11,01), LocalDate.of(2024,01,01),true,Discipliner.BRYSTSVOEMNING,Discipliner.CRAWL);
-        klub.tilfoejMedlem(medlemmm);
-        klub.tilfoejMedlem(konkuu);
         persistens.saveMedlemmerToCSV("medlemmer.txt", klub);
 
         for(Medlem medlem : klub.getMedlemmer()) {
@@ -189,7 +185,7 @@ public class Main {
 
     private static void registrerNytMedlem(Scanner scanner, Klub klub) {
         scanner.nextLine();
-
+        Persistens persistens = new Persistens();
         System.out.println("Indtast fulde navn:");
         String fuldeNavn = scanner.nextLine();
 
@@ -226,6 +222,7 @@ public class Main {
         }
 
         klub.tilfoejMedlem(nytMedlem);
+        persistens.saveMedlemmerToCSV("medlemmer.txt", klub);
         System.out.println("Nyt medlem registreret: " + nytMedlem.getFuldeNavn());
     }
 }
