@@ -98,14 +98,15 @@ public class Medlem {
         LocalDate slutAfAaret = LocalDate.of(aar, Month.DECEMBER, 31);
 
         int alderStartAfAaret = Period.between(foedselsdato, startAfAaret).getYears();
-
         int alderVedMedlemskab = Period.between(foedselsdato, oprettelsesDato).getYears();
+
+        LocalDate fylder18 = foedselsdato.plusYears(18);
+        boolean fylder18IAaret = !fylder18.isBefore(startAfAaret) && !fylder18.isAfter(slutAfAaret);
 
         double kontingent = 0.0;
 
-        if (alderVedMedlemskab >= 18) {
-            LocalDate fylder18 = foedselsdato.plusYears(18);
-            if (fylder18.isAfter(oprettelsesDato) && fylder18.isBefore(slutAfAaret)) {
+        if (alderStartAfAaret < 18 && alderVedMedlemskab < 18) {
+            if (fylder18IAaret && fylder18.isAfter(oprettelsesDato)) {
 
                 double maanedUnder18 = fylder18.getMonthValue() - oprettelsesDato.getMonthValue();
                 double maanedover18 = 12 - maanedUnder18;
@@ -115,7 +116,7 @@ public class Medlem {
                 //hele året under 18
                 kontingent = juniorSats;
             }
-        }else {
+        }else if (alderStartAfAaret >= 18 || alderVedMedlemskab >= 18) {
         //hele året over 18
             kontingent = seniorSats;
         }
@@ -138,18 +139,25 @@ public class Medlem {
 
 
     
-    public void betalKontigent(double beloeb) {
+    public boolean betalKontigent(double beloeb) {
         if (beloeb <= 0) {
             System.out.println("Beløbet skal være større end 0");
-            return;
+            return false;
+        }
+
+        if (restance == 0) {
+            System.out.println("Ingen restance at betale. Alt er allerede betalt.");
+            return false;
         }
 
         if (beloeb >= restance) {
             System.out.println("Betaling modtaget: " + beloeb + " kr. Restance på " + restance + " er nu betalt.");
             restance = 0;
+            return true;
         } else {
             restance -= beloeb;
             System.out.println("Betaling modtaget: " + beloeb + " kr. Ny restance: " + restance + " kr.");
+            return true;
         }
     }
 
