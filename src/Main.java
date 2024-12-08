@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 //TODO Nice up Switch Case
@@ -7,11 +8,20 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Klub klub = new Klub();
+        List<KonkurrenceSvoemmer> konku = new ArrayList<KonkurrenceSvoemmer>();
 
         Persistens persistens = new Persistens();
         persistens.loadMedlemmerFromCSV("medlemmer.txt", klub);
         persistens.loadBedsteTider("resultater.txt", klub);
         persistens.saveMedlemmerToCSV("medlemmer.txt", klub);
+
+        for (Medlem medlem : klub.getMedlemmer()) {
+            if (medlem instanceof KonkurrenceSvoemmer) {
+                konku.add((KonkurrenceSvoemmer) medlem);
+            }
+        }
+
+        KonkurrenceSvoemmer.udskrivTop5Svoemmer(konku);
 
         for(Medlem medlem : klub.getMedlemmer()) {
             if(medlem instanceof KonkurrenceSvoemmer)
