@@ -92,7 +92,7 @@ public class Medlem {
     double juniorSats = 1000;
     double seniorSats = 1600;
 
-    /*public static double alderBetaling(LocalDate foedselsdato, LocalDate medlemsDato, int aar, double juniorSats, double seniorSats) {
+    public static double alderBetaling(LocalDate foedselsdato, LocalDate medlemsDato, int aar, double juniorSats, double seniorSats) {
         //Årets interval
         LocalDate startAfAaret = LocalDate.of(aar, Month.JANUARY, 1);
         LocalDate slutAfAaret = LocalDate.of(aar, Month.DECEMBER, 31);
@@ -120,7 +120,7 @@ public class Medlem {
             //hele året under 18
             kontingent = juniorSats;
         }
-    }*/
+    }
 
     public static double beregnSamletIndkomst(ArrayList<Medlem> medlemmer){
         double total = 0.0;

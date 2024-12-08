@@ -77,14 +77,14 @@ public class Main {
             System.out.println("4: Medlemmer 60 og over");
             System.out.println("5: Konkurrencesvømmere");
             System.out.println("6: Registrer nyt medlem");
-            System.out.println("7: Tilbage til hovedmenuen");
+            System.out.println("7: Gør et aktivt medlem passivt");
+            System.out.println("8: Tilbage til hovedmenuen");
 
             int medlemValg = scanner.nextInt();
             switch (medlemValg) {
                 case 1:
                     for (Medlem medlem : klub.getMedlemmer()) {
                         printMedlemmer(medlem);
-                        //System.out.println(medlem.getFuldeNavn());
                     }
                     break;
                 case 2:
@@ -117,8 +117,12 @@ public class Main {
                     }
                     break;
                 case 6:
-                    registrerNytMedlem(scanner,klub);
+                    registrerNytMedlem(scanner, klub);
+                    break;
                 case 7:
+                    gørMedlemPassivt(scanner, klub);
+                    break;
+                case 8:
                     fortsaetMedlemsMenu = false;
                     break;
                 default:
@@ -126,6 +130,37 @@ public class Main {
                     break;
             }
             System.out.println();
+        }
+    }
+
+    private static void gørMedlemPassivt(Scanner scanner, Klub klub) {
+        ArrayList<Medlem> aktiveMedlemmer = new ArrayList<>();
+        int index = 1;
+
+        // Vis aktive medlemmer
+        System.out.println("\nAktive medlemmer:");
+        for (Medlem medlem : klub.getMedlemmer()) {
+            if (medlem.getErAktivtMedlem()) {
+                System.out.println(index + ": " + medlem.getFuldeNavn());
+                aktiveMedlemmer.add(medlem);
+                index++;
+            }
+        }
+
+        if (aktiveMedlemmer.isEmpty()) {
+            System.out.println("Ingen aktive medlemmer fundet.");
+            return;
+        }
+
+        System.out.println("\nIndtast nummeret på det medlem, du vil gøre passivt:");
+        int valgtIndex = scanner.nextInt();
+        scanner.nextLine();
+
+        if (valgtIndex > 0 && valgtIndex <= aktiveMedlemmer.size()) {
+            Medlem valgtMedlem = aktiveMedlemmer.get(valgtIndex - 1);
+            valgtMedlem.setPassivtMedlem();
+        } else {
+            System.out.println("Ugyldigt valg. Ingen ændringer foretaget.");
         }
     }
 
