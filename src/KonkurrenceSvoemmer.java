@@ -40,9 +40,8 @@ public class KonkurrenceSvoemmer extends Medlem{
         konkurrenceResultater.put(konkurrence, resultat);
     }
 
-    public void printKonkurrenceResultat()
-    {
-        System.out.println(konkurrenceResultater);
+    public Map<String, String> getKonkurrenceResultater() {
+        return konkurrenceResultater;
     }
 
     public static void udskrivTop5Svoemmer(List<KonkurrenceSvoemmer> svoemmere) {
