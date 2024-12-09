@@ -14,6 +14,11 @@ public class KonkurrenceSvoemmer extends Medlem{
         this.discipliner = disciplin.length > 0 ? disciplin : new Discipliner[0];
     }
 
+    public KonkurrenceSvoemmer()
+    {
+
+    }
+
     public Discipliner[] getDiscipliner()
     {
         return discipliner;
@@ -54,7 +59,7 @@ public class KonkurrenceSvoemmer extends Medlem{
         }
 
         for (Discipliner disciplin : Discipliner.values()) {
-            System.out.println("De top 5 Konkurrancesvømmere er: " + disciplin);
+            System.out.println("De top 5 Konkurrencesvømmere er: " + disciplin);
 
             List<Map.Entry<KonkurrenceSvoemmer, Double>> disciplinResultater = resultater.get(disciplin);
             disciplinResultater.sort(Map.Entry.comparingByValue());
@@ -63,7 +68,7 @@ public class KonkurrenceSvoemmer extends Medlem{
                 Map.Entry<KonkurrenceSvoemmer, Double> entry = disciplinResultater.get(i);
                 KonkurrenceSvoemmer svoemmer = entry.getKey();
                 Double time = entry.getValue();
-                System.out.println(" " + i + 1 + svoemmer.getFuldeNavn() + time);
+                System.out.println(" " + (i+1) + ": " + svoemmer.getFuldeNavn() + " " + time);
             }
 
             if (disciplinResultater.isEmpty()) {

@@ -118,7 +118,6 @@ public class Persistens {
                     }
                     if (medlem instanceof KonkurrenceSvoemmer) {
                         ((KonkurrenceSvoemmer) medlem).recordBestTime(disciplin, time);
-                        System.out.println("TEST VIRKER YEEHAWW");
                     }
                 }
             }

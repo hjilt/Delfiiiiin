@@ -15,21 +15,6 @@ public class Main {
         persistens.loadBedsteTider("resultater.txt", klub);
         persistens.saveMedlemmerToCSV("medlemmer.txt", klub);
 
-        for (Medlem medlem : klub.getMedlemmer()) {
-            if (medlem instanceof KonkurrenceSvoemmer) {
-                konku.add((KonkurrenceSvoemmer) medlem);
-            }
-        }
-
-        KonkurrenceSvoemmer.udskrivTop5Svoemmer(konku);
-
-        for(Medlem medlem : klub.getMedlemmer()) {
-            if(medlem instanceof KonkurrenceSvoemmer)
-                System.out.println(medlem.getFuldeNavn() + ": " + ((KonkurrenceSvoemmer) medlem).getBestTimes());
-        }
-        /*medlemmer.add(new KonkurrenceSvoemmer("Sarah Pedersen", "Kvinde", LocalDate.of(2003, 3, 15), true));
-        medlemmer.add(new Medlem("Lone Jensen", "Kvinde", LocalDate.of(1950, 10, 5), true));*/
-
         Traener Ole = new Traener("Ole Dolriis", "Senior Træner", "Mandag 6:00-8:00, Onsdag kl. 6:00-8:00, Fredag kl. 06:00-8:00");
         Traener Oskar = new Traener("Oskar Tuska", "Junior Træner", "Tirsdag 6:00-8:00, Torsdag kl. 6:00-8:00, Lørdag kl. 06:00-8:00" );
         Traener.traenere.add(Oskar);
@@ -78,7 +63,8 @@ public class Main {
             System.out.println("5: Konkurrencesvømmere");
             System.out.println("6: Registrer nyt medlem");
             System.out.println("7: Gør et aktivt medlem passivt");
-            System.out.println("8: Tilbage til hovedmenuen");
+            System.out.println("8: Top 5 rekordtider i hver disciplin");
+            System.out.println("9: Tilbage til hovedmenuen");
 
             int medlemValg = scanner.nextInt();
             switch (medlemValg) {
@@ -123,6 +109,9 @@ public class Main {
                     gørMedlemPassivt(scanner, klub);
                     break;
                 case 8:
+                    udskrivTop5(klub);
+                    break;
+                case 9:
                     fortsaetMedlemsMenu = false;
                     break;
                 default:
@@ -269,5 +258,25 @@ public class Main {
         klub.tilfoejMedlem(nytMedlem);
         persistens.saveMedlemmerToCSV("medlemmer.txt", klub);
         System.out.println("Nyt medlem registreret: " + nytMedlem.getFuldeNavn());
+    }
+
+    private static void udskrivTop5(Klub klub)
+    {
+        System.out.println("1: Junior-hold");
+        System.out.println("2: Senior-hold");
+        Scanner scanner = new Scanner(System.in);
+        int medlemValg = scanner.nextInt();
+        KonkurrenceSvoemmer konku = new KonkurrenceSvoemmer();
+        switch(medlemValg){
+            case 1:
+                konku.udskrivTop5Svoemmer(klub.getJuniorHold());
+                break;
+            case 2:
+                konku.udskrivTop5Svoemmer(klub.getSeniorHold());
+                break;
+            default:
+                System.out.println("Der er ikke valgt et af de to mulige hold.");
+        }
+
     }
 }

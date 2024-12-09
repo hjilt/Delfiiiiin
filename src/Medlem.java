@@ -23,8 +23,18 @@ public class Medlem {
         this.oprettelsesDato = oprettelsesDato;
         restance = beregnKontingent();
     }
+
+    public Medlem()
+    {
+
+    }
 //TODO Funktion til at registrere indbetalinger.
 //TODO Gør så den tager udgangspunkt i registreringsdato ift det der skal betales.
+    public void setPassivtMedlem()
+    {
+        this.erAktivtMedlem = false;
+    }
+
     public void setRestance(double restance) {
         this.restance = restance;
     }
@@ -120,6 +130,7 @@ public class Medlem {
             //hele året under 18
             kontingent = juniorSats;
         }
+        return kontingent;
     }
 
     public static double beregnSamletIndkomst(ArrayList<Medlem> medlemmer){
