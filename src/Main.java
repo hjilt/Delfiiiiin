@@ -253,9 +253,6 @@ public class Main {
                 case 1:
                     Traener.printTraenere();
                     break;
-
-                // case 2:
-
             }
         }
     }
@@ -423,7 +420,6 @@ public class Main {
     }
 
     private static void printKonkurrenceResultater(Klub klub) {
-        // Find konkurrencesvømmere i klubben
         List<KonkurrenceSvoemmer> konkurrenceSvoemmere = new ArrayList<>();
         for (Medlem medlem : klub.getMedlemmer()) {
             if (medlem instanceof KonkurrenceSvoemmer) {
@@ -431,13 +427,11 @@ public class Main {
             }
         }
 
-        // Hvis der ikke er nogen konkurrencesvømmere
         if (konkurrenceSvoemmere.isEmpty()) {
             System.out.println("Der er ingen registrerede konkurrencesvømmere.");
             return;
         }
-
-        // Print resultater for hver konkurrencesvømmer
+        
         System.out.println("Konkurrence-resultater:");
         for (KonkurrenceSvoemmer svoemmer : konkurrenceSvoemmere) {
             System.out.println("Navn: " + svoemmer.getFuldeNavn());
