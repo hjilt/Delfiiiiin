@@ -159,51 +159,59 @@ public class Main {
 
     private static void haandterKonku(Klub klub)
     {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("1: Vis alle konkurrence-svømmere");
-        System.out.println("2: Vis junior konkurrence-svømmere");
-        System.out.println("3: Vis senior konkurrence-svømmere");
-        System.out.println("4: Registrer ny rekord");
-        System.out.println("5: Registrer nyt stævne");
-        System.out.println("6: Rapport over top 5 indenfor discipliner");
-        System.out.println("7: Stævne-resultater");
+        boolean isRunning = true;
+        while(isRunning) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("1: Vis alle konkurrence-svømmere");
+            System.out.println("2: Vis junior konkurrence-svømmere");
+            System.out.println("3: Vis senior konkurrence-svømmere");
+            System.out.println("4: Registrer ny rekord");
+            System.out.println("5: Registrer nyt stævne");
+            System.out.println("6: Rapport over top 5 indenfor discipliner");
+            System.out.println("7: Stævne-resultater");
+            System.out.println("8: Tilbage til Medlemshåndtering");
 
-        int medlemsValg = scanner.nextInt();
-        switch (medlemsValg)
-        {
-            case 1:
-                for (Medlem medlem : klub.getMedlemmer()) {
-                    if (medlem instanceof KonkurrenceSvoemmer) {
-                        printMedlemmer(medlem);
+            int medlemsValg = scanner.nextInt();
+            switch (medlemsValg) {
+                case 1:
+                    for (Medlem medlem : klub.getMedlemmer()) {
+                        if (medlem instanceof KonkurrenceSvoemmer) {
+                            printMedlemmer(medlem);
+                        }
                     }
-                }
-                break;
-            case 2:
-                for (Medlem medlem : klub.getMedlemmer()) {
-                    if (medlem instanceof KonkurrenceSvoemmer && !medlem.erSenior()) {
-                        printMedlemmer(medlem);
+                    break;
+                case 2:
+                    for (Medlem medlem : klub.getMedlemmer()) {
+                        if (medlem instanceof KonkurrenceSvoemmer && !medlem.erSenior()) {
+                            printMedlemmer(medlem);
+                        }
                     }
-                }
-                break;
-            case 3:
-                for (Medlem medlem : klub.getMedlemmer()) {
-                    if (medlem instanceof KonkurrenceSvoemmer && medlem.erSenior()) {
-                        printMedlemmer(medlem);
+                    break;
+                case 3:
+                    for (Medlem medlem : klub.getMedlemmer()) {
+                        if (medlem instanceof KonkurrenceSvoemmer && medlem.erSenior()) {
+                            printMedlemmer(medlem);
+                        }
                     }
-                }
-            case 4:
-                registrerNyRekord(scanner, klub);
-                break;
-            case 5:
-                registrerStaevneResultat(klub, scanner);
-                break;
-            case 6:
-                udskrivTop5(klub);
-                break;
-            case 7:
-                printKonkurrenceResultater(klub);
-            default:
-                System.out.println("Invalid input");
+                    break;
+                case 4:
+                    registrerNyRekord(scanner, klub);
+                    break;
+                case 5:
+                    registrerStaevneResultat(klub, scanner);
+                    break;
+                case 6:
+                    udskrivTop5(klub);
+                    break;
+                case 7:
+                    printKonkurrenceResultater(klub);
+                    break;
+                case 8:
+                    isRunning = false;
+                    break;
+                default:
+                    System.out.println("Invalid input");
+            }
         }
     }
 
@@ -431,7 +439,7 @@ public class Main {
             System.out.println("Der er ingen registrerede konkurrencesvømmere.");
             return;
         }
-        
+
         System.out.println("Konkurrence-resultater:");
         for (KonkurrenceSvoemmer svoemmer : konkurrenceSvoemmere) {
             System.out.println("Navn: " + svoemmer.getFuldeNavn());
