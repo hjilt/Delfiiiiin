@@ -300,9 +300,9 @@ public class Main {
         if (erKonkurrenceSvoemmer) {
             System.out.println("Indtast discipliner" +
                     "\n    (BUTTERFLY,\n" +
-                    "    CRAWL,\n" +
-                    "    RYGCRAWL,\n" +
-                    "    BRYSTSVOEMNING) \n(separeret med semikolon)");
+                    "     CRAWL,\n" +
+                    "     RYGCRAWL,\n" +
+                    "     BRYSTSVOEMNING) \n(separeret med semikolon)");
             String disciplinerInput = scanner.nextLine();
             String[] disciplinerStrings = disciplinerInput.split(";");
             Discipliner[] discipliner = new Discipliner[disciplinerStrings.length];
