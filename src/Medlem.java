@@ -132,7 +132,7 @@ public class Medlem {
     }
 
 
-    
+
     public void betalKontigent(double beloeb) {
         if (beloeb <= 0) {
             System.out.println("Beløbet skal være større end 0");
