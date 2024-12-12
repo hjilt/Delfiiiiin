@@ -14,6 +14,16 @@ public class KonkurrenceSvoemmer extends Medlem{
         this.discipliner = disciplin.length > 0 ? disciplin : new Discipliner[0];
     }
 
+    public KonkurrenceSvoemmer()
+    {
+
+    }
+
+    public Discipliner[] getDiscipliner()
+    {
+        return discipliner;
+    }
+
     public void recordBestTime(Discipliner disciplin, double time)
     {
         if(!bestResults.containsKey(disciplin) || time < bestResults.get(disciplin))
@@ -30,28 +40,39 @@ public class KonkurrenceSvoemmer extends Medlem{
         konkurrenceResultater.put(konkurrence, resultat);
     }
 
-    public void printKonkurrenceResultat()
-    {
-        System.out.println(konkurrenceResultater);
+    public Map<String, String> getKonkurrenceResultater() {
+        return konkurrenceResultater;
     }
 
-    public Discipliner[] getDiscipliner()
-    {
-        return discipliner;
-    }
+    public static void udskrivTop5Svoemmer(List<KonkurrenceSvoemmer> svoemmere) {
+        Map<Discipliner, List<Map.Entry<KonkurrenceSvoemmer, Double>>> resultater = new HashMap<>();
+        for (Discipliner disciplin : Discipliner.values()) {
+            resultater.put(disciplin, new ArrayList<>());
+        }
+        for (KonkurrenceSvoemmer svoemmer : svoemmere) {
+            for (Map.Entry<Discipliner, Double> entry : svoemmer.getBestTimes().entrySet()) {
+                Discipliner disciplin = entry.getKey();
+                Double time = entry.getValue();
+                resultater.get(disciplin).add(Map.entry(svoemmer, time));
+            }
+        }
 
-    public void udskrivBestTimes()
-    {
-        System.out.println("The best result: "+getFuldeNavn()+":");
-        for (Discipliner disciplin : Discipliner.values())
-        {
-            if (bestResults.containsKey(disciplin))
-            {
-                System.out.printf("Tid: ", disciplin, bestResults.get(disciplin));
-            }else {
-                System.out.printf(" Resultater", disciplin);
+        for (Discipliner disciplin : Discipliner.values()) {
+            System.out.println("De top 5 Konkurrencesvømmere er: " + disciplin);
+
+            List<Map.Entry<KonkurrenceSvoemmer, Double>> disciplinResultater = resultater.get(disciplin);
+            disciplinResultater.sort(Map.Entry.comparingByValue());
+
+            for (int i = 0; i < Math.min(5, disciplinResultater.size()); i++) {
+                Map.Entry<KonkurrenceSvoemmer, Double> entry = disciplinResultater.get(i);
+                KonkurrenceSvoemmer svoemmer = entry.getKey();
+                Double time = entry.getValue();
+                System.out.println(" " + (i+1) + ": " + svoemmer.getFuldeNavn() + " " + time);
             }
 
+            if (disciplinResultater.isEmpty()) {
+                System.out.println("Ingen resultater for denne disciplin");
+            }
         }
     }
 }

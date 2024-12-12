@@ -12,6 +12,13 @@ public class Klub {
         medlemmer = new ArrayList<>();
     }
 
+    public ArrayList<KonkurrenceSvoemmer> getJuniorHold() {
+        return juniorHold;
+    }
+
+    public ArrayList<KonkurrenceSvoemmer> getSeniorHold() {
+        return seniorHold;
+    }
 
     public void tilfoejMedlem(Medlem medlem) {
         if (medlem instanceof KonkurrenceSvoemmer svoemmer) {
